@@ -1,0 +1,3 @@
+rootProject.name='XBase'
+include ':app'
+include ':XBase'
