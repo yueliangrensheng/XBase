@@ -2,11 +2,12 @@ package com.yazao.lib.xbase;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.lang.reflect.Field;
 
@@ -17,8 +18,7 @@ import java.lang.reflect.Field;
  * @data 10/04/2017 5:18 PM
  */
 
-public abstract class WBaseFragment extends Fragment{
-
+public abstract class WBaseFragment extends Fragment {
 
 
     private boolean isFirstResume = true;
@@ -32,12 +32,12 @@ public abstract class WBaseFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Bundle
-        Bundle extras=getActivity().getIntent().getExtras();
-        if (extras!=null){
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras != null) {
             getBundleExtras(extras);
         }
         Bundle arguments = getArguments();
-        if (arguments!=null){
+        if (arguments != null) {
             getBundleArguments(arguments);
         }
 
@@ -74,7 +74,6 @@ public abstract class WBaseFragment extends Fragment{
 
         initViewsAndEvents();
     }
-
 
 
     @Override

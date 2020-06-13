@@ -1,20 +1,18 @@
 package com.yazao.lib.xbase;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yazao.lib.common.Config;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yazao.lib.net.NetChangeObserver;
 import com.yazao.lib.net.NetChangeReceiver;
 import com.yazao.lib.net.NetChangeReceiverUtil;
 import com.yazao.lib.net.NetUtil;
-import com.yazao.lib.util.HideSoftInputUtil;
-import com.yazao.lib.util.screen.ScreenUtil;
 
 /**
  * 类描述：
@@ -34,11 +32,10 @@ public abstract class WBaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         if (isNoTitle()) {
             /*set it to be no title*/
-//            requestWindowFeature(Window.FEATURE_NO_TITLE);
             supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-//            if (getSupportActionBar()!=null){
-//                getSupportActionBar().hide();
-//            }
+            if (getSupportActionBar()!=null){
+                getSupportActionBar().hide();
+            }
         }
         super.onCreate(savedInstanceState);
         if (isNoStateBar()) {
@@ -58,9 +55,6 @@ public abstract class WBaseActivity extends AppCompatActivity {
         if (extras != null) {
             getBundleExtras(extras);
         }
-
-        //Activity Manager
-//        ActivityManager.getInstance().addActivity(this);
 
         //NetWork Change Listener
         if (mNetChangeObserver == null) {
@@ -88,13 +82,6 @@ public abstract class WBaseActivity extends AppCompatActivity {
         } else {
             throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
         }
-
-        //调用今日头条的屏幕适配 //设计图以360dp为标准
-        if (Config.IS_TOUTIAO_ADAPTATION) {
-            int designWidth = Config.designWidth;
-            ScreenUtil.getInstance().setCustomDensity(this, designWidth, getApplication());
-        }
-
     }
 
     @Override
@@ -144,19 +131,10 @@ public abstract class WBaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-//        ActivityManager.getInstance().removeActivity(this);
     }
 
-    /**
-     * 处理键盘
-     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (HideSoftInputUtil.getInstance(this).isShouldHideInput(ev)) {
-                HideSoftInputUtil.getInstance(this).hideSoftInput();
-            }
-        }
         return super.dispatchTouchEvent(ev);
     }
 

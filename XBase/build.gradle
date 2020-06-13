@@ -28,5 +28,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     //xlog
-    implementation('com.yazao:xlog:1.0.0')
+    implementation('com.yazao:xlog:1.0.1')
+    //xnet
+    implementation('com.yazao:xnet:1.0.0')
 }
