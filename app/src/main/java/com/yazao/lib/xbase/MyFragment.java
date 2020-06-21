@@ -9,7 +9,7 @@ import com.yazao.lib.base.BaseFragment;
 
 public class MyFragment extends BaseFragment {
     @Override
-    protected int getContentViewLayoutID() {
+    protected int getLayoutID() {
         return R.layout.fragment_layout;
     }
 

@@ -29,7 +29,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // xbase
-    implementation 'com.yazao:xbase:1.0.2'
+    implementation 'com.yazao:xbase:1.0.4'
     // xtoast
-    implementation 'com.yazao:xtoast:+'
+    implementation 'com.yazao:xtoast:1.0.2'
 }

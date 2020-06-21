@@ -8,12 +8,10 @@ import com.yazao.lib.net.NetUtil;
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.demo.R;
 
-import static com.yazao.lib.net.NetUtil.*;
-
 public class MainActivity extends BaseActivity {
 
     @Override
-    protected int getContentViewLayoutID() {
+    protected int getLayoutID() {
         return R.layout.activity_main;
     }
 
@@ -34,7 +32,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onNetWorkConnected(NetType type) {
+    protected void onNetWorkConnected(NetUtil.NetType type) {
         switch (type) {
             case NONE:// none
                 break;
