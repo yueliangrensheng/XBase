@@ -15,7 +15,7 @@ import com.yazao.lib.net.NetChangeReceiverUtil;
 import com.yazao.lib.net.NetUtil;
 
 /**
- * 类描述：
+ * 类描述：Activity基类
  *
  * @author zhaishaoping
  * @data 10/04/2017 10:40 AM
@@ -76,7 +76,7 @@ public abstract class WBaseActivity extends AppCompatActivity {
 
 
         //set layout
-        int layoutID = getContentViewLayoutID();
+        int layoutID = getLayoutID();
         if (layoutID != 0) {
             setContentView(layoutID);
         } else {
@@ -111,7 +111,7 @@ public abstract class WBaseActivity extends AppCompatActivity {
     /**
      * Layout Id
      */
-    protected abstract int getContentViewLayoutID();
+    protected abstract int getLayoutID();
 
     /**
      * init data

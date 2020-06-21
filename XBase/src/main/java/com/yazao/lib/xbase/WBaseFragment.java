@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import java.lang.reflect.Field;
 
 /**
- * 类描述：
+ * 类描述：Fragment基类
  *
  * @author zhaishaoping
  * @data 10/04/2017 5:18 PM
@@ -57,7 +57,7 @@ public abstract class WBaseFragment extends Fragment {
 //            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        }
 
-        int layoutID = getContentViewLayoutID();
+        int layoutID = getLayoutID();
         view = null;
         if (layoutID != 0) {
             view = inflater.inflate(layoutID, null);
@@ -189,7 +189,7 @@ public abstract class WBaseFragment extends Fragment {
     protected abstract void getBundleExtras(Bundle extras);
 
 
-    protected abstract int getContentViewLayoutID();
+    protected abstract int getLayoutID();
 
     protected abstract void initViewsAndEvents();
 }
