@@ -44,5 +44,5 @@ dependencies {
     //xlog
     implementation('com.yazao:xlog:1.0.1')
     //xnet
-    implementation('com.yazao:xnet:1.0.1')
+    api('com.yazao:xnet:1.0.1')
 }
