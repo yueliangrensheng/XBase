@@ -1,13 +1,19 @@
 package com.yazao.lib.xbase;
 
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.yazao.lib.net.NetChangeObserver;
 import com.yazao.lib.net.NetChangeReceiver;
@@ -33,7 +39,7 @@ public abstract class WBaseActivity extends AppCompatActivity {
         if (isNoTitle()) {
             /*set it to be no title*/
             supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-            if (getSupportActionBar()!=null){
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
         }
@@ -42,6 +48,10 @@ public abstract class WBaseActivity extends AppCompatActivity {
 //			View doctorView =findViewById(android.R.id.content);
             View doctorView = getWindow().getDecorView();
             doctorView.setSystemUiVisibility(View.INVISIBLE);//隐藏状态栏同时Activity会伸展全屏显示
+        } else {
+            if (isTransparentStatusBar()) {//透明状态栏
+                transparentStatusBar();
+            }
         }
         if (isFullScreen()) {
             /*set it to be full screen*/
@@ -84,16 +94,66 @@ public abstract class WBaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 透明状态栏
+     */
+    private void transparentStatusBar() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+    }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initData();
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        //是否需要暗黑模式
+        if (isFitDarkMode()) {
+            int result = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (result) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    break;
+
+            }
+        }
+    }
+
+
     //判断网络是否可用
     protected boolean isNetworkAvailable() {
         return NetUtil.getInstance().isNetworkconnected(this);
     }
+
+    /**
+     * 是否需要透明状态栏
+     *
+     * @return
+     */
+    protected abstract boolean isTransparentStatusBar();
+
+    /**
+     * 是否需要暗黑模式
+     *
+     * @return
+     */
+    protected abstract boolean isFitDarkMode();
 
     protected abstract boolean isNoStateBar();
 
