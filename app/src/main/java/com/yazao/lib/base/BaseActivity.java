@@ -35,4 +35,14 @@ public abstract class BaseActivity extends WBaseActivity {
     protected void getBundleExtras(Bundle extras) {
 
     }
+
+    @Override
+    protected boolean isFitDarkMode() {
+        return false;
+    }
+
+    @Override
+    protected boolean isTransparentStatusBar() {
+        return false;
+    }
 }
