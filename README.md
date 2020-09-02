@@ -8,7 +8,7 @@ dependencies {
     ...
 
     // xbase
-    implementation 'com.yazao:xbase:1.0.4'
+    implementation 'com.yazao:xbase:1.0.5.2'
 
 }
 ```
