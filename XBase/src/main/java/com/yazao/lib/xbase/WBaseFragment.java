@@ -1,12 +1,15 @@
 package com.yazao.lib.xbase;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import java.lang.reflect.Field;
@@ -75,6 +78,24 @@ public abstract class WBaseFragment extends Fragment {
         initViewsAndEvents();
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        //是否需要暗黑模式
+        if (isFitDarkMode()) {
+            int result = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (result) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    break;
+
+            }
+        }
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -192,4 +213,11 @@ public abstract class WBaseFragment extends Fragment {
     protected abstract int getLayoutID();
 
     protected abstract void initViewsAndEvents();
+
+    /**
+     * 是否需要暗黑模式
+     *
+     * @return
+     */
+    protected abstract boolean isFitDarkMode();
 }
