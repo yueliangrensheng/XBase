@@ -60,11 +60,16 @@ public abstract class WBaseFragment extends Fragment {
 //            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        }
 
-        int layoutID = getLayoutID();
-        view = null;
-        if (layoutID != 0) {
-            view = inflater.inflate(layoutID, null);
-            return view;
+        if (isFitDataBinding()){
+            // do nothing
+            //need DataBinding to do
+        } else {
+            int layoutID = getLayoutID();
+            view = null;
+            if (layoutID != 0) {
+                view = inflater.inflate(layoutID, null);
+                return view;
+            }
         }
         view = super.onCreateView(inflater, container, savedInstanceState);
         return view;
@@ -220,4 +225,10 @@ public abstract class WBaseFragment extends Fragment {
      * @return
      */
     protected abstract boolean isFitDarkMode();
+    /**
+     * 是否需要数据绑定
+     *
+     * @return true: Fragment不需要手动
+     */
+    protected abstract boolean isFitDataBinding();
 }

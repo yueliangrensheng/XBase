@@ -11,7 +11,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -86,11 +85,16 @@ public abstract class WBaseActivity extends AppCompatActivity {
 
 
         //set layout
-        int layoutID = getLayoutID();
-        if (layoutID != 0) {
-            setContentView(layoutID);
+        if (isFitDataBinding()) {
+            //do nothing
+            //need DataBinding to do
         } else {
-            throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
+            int layoutID = getLayoutID();
+            if (layoutID != 0) {
+                setContentView(layoutID);
+            } else {
+                throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
+            }
         }
     }
 
@@ -150,6 +154,13 @@ public abstract class WBaseActivity extends AppCompatActivity {
      * @return
      */
     protected abstract boolean isTransparentStatusBar();
+
+    /**
+     * 是否需要数据绑定
+     *
+     * @return true: Activity不需要手动 setContentView(getLayoutID()), DataBind来完成。false:默认实现，即setContentView(getLayoutID())
+     */
+    protected abstract boolean isFitDataBinding();
 
     /**
      * 是否需要暗黑模式
