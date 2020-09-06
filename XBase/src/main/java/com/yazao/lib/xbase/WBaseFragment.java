@@ -44,6 +44,7 @@ public abstract class WBaseFragment extends Fragment {
             getBundleArguments(arguments);
         }
 
+        requestNetData();
     }
 
     protected abstract void getBundleArguments(Bundle arguments);
@@ -231,4 +232,9 @@ public abstract class WBaseFragment extends Fragment {
      * @return true: Fragment的 onCreateView() 返回默认值；false：返回 getLayoutID()的布局
      */
     protected abstract boolean isFitDataBinding();
+
+    /**
+     * Fragment生命周期中，该方法只会执行一次，可用于进入页面时的网络请求
+     */
+    protected abstract void requestNetData();
 }
