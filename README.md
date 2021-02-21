@@ -1,7 +1,7 @@
 # XBase
 Activity、Fragment、Application的基类
 
-# how to use
+## how to use
 1. app/build.gradle
 ```
 dependencies {
