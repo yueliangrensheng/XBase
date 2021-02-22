@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
 import java.lang.reflect.Field;
@@ -21,7 +23,7 @@ import java.lang.reflect.Field;
  * @data 10/04/2017 5:18 PM
  */
 
-public abstract class WBaseFragment extends Fragment {
+public abstract class WBaseFragment<DB extends ViewDataBinding> extends Fragment {
 
 
     private boolean isFirstResume = true;
@@ -29,7 +31,7 @@ public abstract class WBaseFragment extends Fragment {
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
     protected View view;
-
+    protected DB mDataBinding = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,18 +63,24 @@ public abstract class WBaseFragment extends Fragment {
 //            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        }
 
-        if (isFitDataBinding()){
-            // do nothing
-            //need DataBinding to do
-        } else {
-            int layoutID = getLayoutID();
-            view = null;
-            if (layoutID != 0) {
+        int layoutID = getLayoutID();
+        view = null;
+        if (layoutID != 0) {
+            if (isFitDataBinding()) {
+                mDataBinding = DataBindingUtil.inflate(inflater, layoutID, container, false);
+                mDataBinding.setLifecycleOwner(this);
+                view = mDataBinding.getRoot();
+
+            } else {
                 view = inflater.inflate(layoutID, null);
-                return view;
             }
+        } else {
+            throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
         }
-        view = super.onCreateView(inflater, container, savedInstanceState);
+
+        if (view == null) {
+            view = super.onCreateView(inflater, container, savedInstanceState);
+        }
         return view;
     }
 
@@ -146,6 +154,9 @@ public abstract class WBaseFragment extends Fragment {
 //        } catch (IllegalAccessException e) {
 //            throw new RuntimeException(e);
 //        }
+        if (mDataBinding != null) {
+            mDataBinding = null;
+        }
     }
 
     @Override
@@ -226,6 +237,7 @@ public abstract class WBaseFragment extends Fragment {
      * @return
      */
     protected abstract boolean isFitDarkMode();
+
     /**
      * 是否需要数据绑定
      *

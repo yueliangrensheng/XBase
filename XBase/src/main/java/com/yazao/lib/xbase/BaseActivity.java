@@ -2,9 +2,11 @@ package com.yazao.lib.xbase;
 
 import android.os.Bundle;
 
+import androidx.databinding.ViewDataBinding;
+
 import com.yazao.lib.net.NetUtil;
 
-public abstract class BaseActivity extends WBaseActivity {
+public abstract class BaseActivity<DB extends ViewDataBinding> extends WBaseActivity<DB> {
     @Override
     protected boolean isNoStateBar() {
         return false;

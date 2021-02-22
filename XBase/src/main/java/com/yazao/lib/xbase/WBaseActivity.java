@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import com.yazao.lib.net.NetChangeObserver;
 import com.yazao.lib.net.NetChangeReceiver;
@@ -26,12 +28,14 @@ import com.yazao.lib.net.NetUtil;
  * @data 10/04/2017 10:40 AM
  */
 
-public abstract class WBaseActivity extends AppCompatActivity {
+public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompatActivity {
 
     /**
      * network status
      */
     protected NetChangeObserver mNetChangeObserver = null;
+
+    protected DB mDataBinding = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +89,19 @@ public abstract class WBaseActivity extends AppCompatActivity {
 
 
         //set layout
-        if (isFitDataBinding()) {
-            //do nothing
-            //need DataBinding to do
-        } else {
-            int layoutID = getLayoutID();
-            if (layoutID != 0) {
-                setContentView(layoutID);
+        int layoutID = getLayoutID();
+        if (layoutID != 0) {
+            if (isFitDataBinding()) {
+                mDataBinding = DataBindingUtil.setContentView(this, layoutID);
+                mDataBinding.setLifecycleOwner(this);
             } else {
-                throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
+                setContentView(layoutID);
             }
+
+        } else {
+            throw new IllegalArgumentException("You must return a right ContentView Layout Id.");
         }
+
     }
 
     /**
@@ -200,6 +206,10 @@ public abstract class WBaseActivity extends AppCompatActivity {
             NetChangeReceiver.unRegisterObserver(mNetChangeObserver);
         }
         NetChangeReceiverUtil.getInstance().unRegisterNetworkStateReceiver(this);
+
+        if (mDataBinding != null) {
+            mDataBinding = null;
+        }
     }
 
     @Override

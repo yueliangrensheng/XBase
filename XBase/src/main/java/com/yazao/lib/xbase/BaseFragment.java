@@ -2,7 +2,9 @@ package com.yazao.lib.xbase;
 
 import android.os.Bundle;
 
-public abstract class BaseFragment extends WBaseFragment {
+import androidx.databinding.ViewDataBinding;
+
+public abstract class BaseFragment<DB extends ViewDataBinding> extends WBaseFragment<DB> {
     @Override
     protected void getBundleArguments(Bundle arguments) {
 
@@ -26,5 +28,15 @@ public abstract class BaseFragment extends WBaseFragment {
     @Override
     protected void getBundleExtras(Bundle extras) {
 
+    }
+
+    @Override
+    protected boolean isFitDarkMode() {
+        return false;
+    }
+
+    @Override
+    protected boolean isFitDataBinding() {
+        return false;
     }
 }
