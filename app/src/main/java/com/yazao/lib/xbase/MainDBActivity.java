@@ -1,30 +1,22 @@
 package com.yazao.lib.xbase;
 
-import android.content.Intent;
 import android.view.Gravity;
-import android.view.View;
 
 import com.yazao.lib.net.NetUtil;
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.demo.R;
+import com.yazao.lib.xbase.demo.databinding.ActivityMainDataBindingBinding;
 
-public class MainActivity extends BaseActivity {
+public class MainDBActivity extends BaseActivity<ActivityMainDataBindingBinding> {
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_main;
+        return R.layout.activity_main_data_binding;
     }
 
     @Override
     protected void initData() {
-        findViewById(R.id.textview).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                XToast.show("hello world");
-                startActivity(new Intent(MainActivity.this, MainDBActivity.class));
-            }
-        });
+        mDataBinding.setTextContent("DataBinding Activity");
     }
 
     @Override
@@ -34,7 +26,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected boolean isFitDataBinding() {
-        return false;
+        return true;
     }
 
     @Override

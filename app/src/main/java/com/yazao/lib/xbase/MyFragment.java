@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.demo.R;
-import com.yazao.lib.base.BaseFragment;
 
 public class MyFragment extends BaseFragment {
     @Override
@@ -23,5 +22,15 @@ public class MyFragment extends BaseFragment {
                 XToast.show("I'm fragment", Gravity.CENTER);
             }
         });
+    }
+
+    @Override
+    protected boolean isFitDataBinding() {
+        return false;
+    }
+
+    @Override
+    protected void requestNetData() {
+
     }
 }
