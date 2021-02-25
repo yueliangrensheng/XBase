@@ -20,6 +20,7 @@ import com.yazao.lib.net.NetChangeObserver;
 import com.yazao.lib.net.NetChangeReceiver;
 import com.yazao.lib.net.NetChangeReceiverUtil;
 import com.yazao.lib.net.NetUtil;
+import com.yazao.lib.util.HideSoftInputUtil;
 
 /**
  * 类描述：Activity基类
@@ -219,6 +220,11 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            if (HideSoftInputUtil.getInstance(this).isShouldHideInput(ev)) {
+                HideSoftInputUtil.getInstance(this).hideSoftInput();
+            }
+        }
         return super.dispatchTouchEvent(ev);
     }
 

@@ -19,7 +19,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends WBaseActi
 
     @Override
     protected boolean isNoTitle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -45,5 +45,10 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends WBaseActi
     @Override
     protected boolean isTransparentStatusBar() {
         return false;
+    }
+
+    @Override
+    protected boolean isFitDataBinding() {
+        return true;
     }
 }

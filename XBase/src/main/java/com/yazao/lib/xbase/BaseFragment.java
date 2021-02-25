@@ -37,6 +37,6 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends WBaseFrag
 
     @Override
     protected boolean isFitDataBinding() {
-        return false;
+        return true;
     }
 }
