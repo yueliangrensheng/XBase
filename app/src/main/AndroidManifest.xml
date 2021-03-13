@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.yazao.lib.xbase.MainDBActivity" />
+        <activity android:name="com.yazao.lib.xxbase.MainActivityKt" />
     </application>
 
 </manifest>
