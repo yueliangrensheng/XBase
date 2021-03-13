@@ -2,11 +2,11 @@ package com.yazao.lib.xbase
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.yazao.lib.net.NetUtil
+import com.yazao.lib.xnet.observer.NetUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
-abstract class BaseActivityKt<DB : ViewDataBinding> : WBaseActivity<DB>(), CoroutineScope by MainScope() {
+abstract class BaseActivityKt<DB : ViewDataBinding, VM : BaseViewModel> : WBaseActivity<DB, VM>(), CoroutineScope by MainScope() {
 
     override fun isNoStateBar(): Boolean = false
 

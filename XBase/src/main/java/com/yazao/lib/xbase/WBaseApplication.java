@@ -3,6 +3,7 @@ package com.yazao.lib.xbase;
 import android.app.Application;
 import android.content.Context;
 
+import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xlog.BuildConfig;
 import com.yazao.lib.xlog.Log;
 
@@ -11,6 +12,8 @@ import com.yazao.lib.xlog.Log;
  */
 
 public class WBaseApplication extends Application {
+
+    protected static Application instance;
 
     protected static Context mContext;
 
@@ -21,6 +24,7 @@ public class WBaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         mContext = this.getApplicationContext();
         init();
     }
@@ -28,6 +32,8 @@ public class WBaseApplication extends Application {
     private void init() {
         //Log日志
         Log.init().setLogLevel(BuildConfig.DEBUG ? Log.LogLevel.FULL : Log.LogLevel.NONE).setMethodCount(2).hideThreadInfo();
+        //init xtoast
+        XToast.init(this);
     }
 
 }

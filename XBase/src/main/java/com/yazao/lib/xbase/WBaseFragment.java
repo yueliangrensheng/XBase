@@ -14,8 +14,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-import java.lang.reflect.Field;
-
 /**
  * 类描述：Fragment基类
  *

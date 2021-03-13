@@ -16,11 +16,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.yazao.lib.net.NetChangeObserver;
-import com.yazao.lib.net.NetChangeReceiver;
-import com.yazao.lib.net.NetChangeReceiverUtil;
-import com.yazao.lib.net.NetUtil;
 import com.yazao.lib.util.HideSoftInputUtil;
+import com.yazao.lib.xnet.observer.NetChangeObserver;
+import com.yazao.lib.xnet.observer.NetChangeReceiver;
+import com.yazao.lib.xnet.observer.NetChangeReceiverUtil;
+import com.yazao.lib.xnet.observer.NetUtil;
 
 /**
  * 类描述：Activity基类
@@ -29,7 +29,7 @@ import com.yazao.lib.util.HideSoftInputUtil;
  * @data 10/04/2017 10:40 AM
  */
 
-public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompatActivity {
+public abstract class WBaseActivity<DB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
 
     /**
      * network status
@@ -37,6 +37,9 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
     protected NetChangeObserver mNetChangeObserver = null;
 
     protected DB mDataBinding = null;
+
+    protected VM mViewModel = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
             }
         }
         super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(mViewModel);
         if (isNoStateBar()) {
 //			View doctorView =findViewById(android.R.id.content);
             View doctorView = getWindow().getDecorView();

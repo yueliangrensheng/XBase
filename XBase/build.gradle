@@ -47,14 +47,24 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //xlog
-    implementation('com.yazao:xlog:1.0.1')
+    api('com.yazao:xlog:1.0.1')
     //xnet
-    api('com.yazao:xnet:1.0.1')
+    api('com.yazao:xnet:1.0.2')
     //xutil
     api('com.yazao:xutil:1.0.0')
+    //xdialog
+    api('com.yazao:xdialog:1.0.1')
+    //xtoast
+    api('com.yazao:xtoast:1.0.2')
+    //xshare
+    api('com.yazao:xshare:1.1.0')
+    //xrecyclerview
+    api('com.yazao:xrecyclerview:1.0.0')
 }
