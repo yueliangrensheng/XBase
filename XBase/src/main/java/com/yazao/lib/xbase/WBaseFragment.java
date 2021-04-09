@@ -66,7 +66,7 @@ public abstract class WBaseFragment<DB extends ViewDataBinding> extends Fragment
         if (layoutID != 0) {
             if (isFitDataBinding()) {
                 mDataBinding = DataBindingUtil.inflate(inflater, layoutID, container, false);
-                mDataBinding.setLifecycleOwner(this);
+                mDataBinding.setLifecycleOwner(getViewLifecycleOwner());
                 view = mDataBinding.getRoot();
 
             } else {
