@@ -2,20 +2,52 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//---------------------------------- jCenter begin -------------------------------
-apply plugin: 'com.novoda.bintray-release'
+//---------------------------------- sonatype maven start -------------------------------
+apply plugin: 'maven'
 
-//jCenter 新添加
-publish {
-    userOrg = 'moonlife' //在https://bintray.com上注册的用户名
-    groupId = 'com.yazao' //jCenter上的路径
-    artifactId = 'xbase' //项目名称 --- 必须和 bintray上的创建的Name一致
-    publishVersion = '1.0.7.1' //library的版本号
-    desc = 'a base lib for Android' //library的简单描述
-    website = 'https://github.com/yueliangrensheng/XBase' //library的开源地址，例如在github上的地址
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
-//---------------------------------- jCenter end -------------------------------
+def getRepositoryUsername() {
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+}
+
+def getRepositoryPassword() {
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.groupId = GROUP
+                pom.artifactId = "xbase"
+                pom.version = VERSION_NAME
+                repository(url: uri(RELEASE_REPOSITORY_URL)) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+            }
+        }
+    }
+    task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+    artifacts {
+        archives androidSourcesJar
+//        archives androidJavadocsJar
+    }
+}
+//---------------------------------- sonatype maven end -------------------------------
 
 android {
     compileSdkVersion 29
@@ -56,7 +88,7 @@ dependencies {
     //xlog
     api('com.yazao:xlog:1.0.1')
     //xnet
-    api('com.yazao:xnet:1.0.2')
+    api('com.yazao:xnet:1.0.2.1')
     //xutil
     api('com.yazao:xutil:1.0.1')
     //xdialog
