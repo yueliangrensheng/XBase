@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.yazao.lib.net.NetChangeObserver;
-import com.yazao.lib.net.NetChangeReceiver;
-import com.yazao.lib.net.NetChangeReceiverUtil;
-import com.yazao.lib.net.NetUtil;
+import com.yazao.lib.xnet.observer.NetChangeObserver;
+import com.yazao.lib.xnet.observer.NetChangeReceiver;
+import com.yazao.lib.xnet.observer.NetChangeReceiverUtil;
+import com.yazao.lib.xnet.observer.NetUtil;
 import com.yazao.lib.util.HideSoftInputUtil;
 
 /**

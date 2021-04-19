@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.databinding.ViewDataBinding;
 
-import com.yazao.lib.net.NetUtil;
+import com.yazao.lib.xnet.observer.NetUtil;
 
 public abstract class BaseActivity<DB extends ViewDataBinding> extends WBaseActivity<DB> {
     @Override

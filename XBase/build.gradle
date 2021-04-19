@@ -101,7 +101,7 @@ dependencies {
     //xlog
     implementation('com.yazao:xlog:1.0.1')
     //xnet
-    api('com.yazao:xnet:1.0.1')
+    api('com.yazao:xnet:1.0.2.1')
     //xutil
     api('com.yazao:xutil:1.0.0')
 }

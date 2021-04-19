@@ -2,7 +2,7 @@ package com.yazao.lib.xbase
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.yazao.lib.net.NetUtil
+import com.yazao.lib.xnet.observer.NetUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
