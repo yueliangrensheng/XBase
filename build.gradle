@@ -14,9 +14,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.1'
 
-        //jCenter 新添加
-        classpath 'com.novoda:bintray-release:0.9.2'
-
         //kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
