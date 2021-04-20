@@ -21,9 +21,9 @@ afterEvaluate { project ->
     uploadArchives {
         repositories {
             mavenDeployer {
-                pom.groupId = GROUP
-                pom.artifactId = "xbase"
-                pom.version = VERSION_NAME
+                pom.groupId = PUBLISH_GROUP_ID
+                pom.artifactId = PUBLISH_ARTIFACT_ID
+                pom.version = PUBLISH_VERSION
                 repository(url: uri(RELEASE_REPOSITORY_URL)) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
@@ -38,16 +38,22 @@ afterEvaluate { project ->
         classifier = 'javadoc'
         from androidJavadocs.destinationDir
     }
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.sourceFiles
-    }
+    // 这里注释的原因 ： build_mavencentral.properties 中已经定义了 这个 Task
+//    task androidSourcesJar(type: Jar) {
+//        classifier = 'sources'
+//        from android.sourceSets.main.java.sourceFiles
+//    }
     artifacts {
         archives androidSourcesJar
 //        archives androidJavadocsJar
     }
 }
 //---------------------------------- sonatype maven end -------------------------------
+
+//---------------------------------- sonatype maven center start -------------------------------
+//这里是上传到 Sonatype 的 MavenCenter仓库中
+apply from: "${rootProject.projectDir}/build_mavencentral.gradle"
+//---------------------------------- sonatype maven center end -------------------------------
 
 android {
     compileSdkVersion 29
