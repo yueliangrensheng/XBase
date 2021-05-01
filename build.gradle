@@ -5,11 +5,8 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral()
         jcenter()
-        maven {
-//            url "http://10.0.26.32:8081/repository/moon/"
-            url "/Users/zhaishaoping/.m2/repository/"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.1'
@@ -25,11 +22,8 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
-        maven {
-//            url "http://10.0.26.32:8081/repository/moon/"
-            url "/Users/zhaishaoping/.m2/repository/"
-        }
     }
 
     tasks.withType(Javadoc) {
