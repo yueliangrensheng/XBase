@@ -1,4 +1,4 @@
-package com.yazao.lib.base;
+package com.yazao.demo;
 
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.WBaseApplication;

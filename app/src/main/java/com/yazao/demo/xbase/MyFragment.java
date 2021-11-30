@@ -1,9 +1,10 @@
-package com.yazao.lib.xbase;
+package com.yazao.demo.xbase;
 
 import android.view.Gravity;
 import android.view.View;
 
 import com.yazao.lib.toast.XToast;
+import com.yazao.lib.xbase.BaseFragment;
 import com.yazao.lib.xbase.demo.R;
 
 public class MyFragment extends BaseFragment {

@@ -1,28 +1,37 @@
-package com.yazao.lib.xbase;
+package com.yazao.demo.xbase;
 
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 
-import com.yazao.lib.net.NetUtil;
 import com.yazao.lib.toast.XToast;
+import com.yazao.lib.xbase.BaseActivity;
 import com.yazao.lib.xbase.demo.R;
+import com.yazao.lib.xbase.demo.databinding.ActivityMainDataBindingBinding;
+import com.yazao.lib.xnet.observer.NetUtil;
 
-public class MainActivity extends BaseActivity {
+/**
+ * 使用 DataBinding
+ */
+public class MainDBActivity extends BaseActivity<ActivityMainDataBindingBinding> {
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_main;
+        return R.layout.activity_main_data_binding;
+    }
+
+    @Override
+    protected String getLayoutIDString() {
+        return "activity_main_data_binding";
     }
 
     @Override
     protected void initData() {
-        findViewById(R.id.textview).setOnClickListener(new View.OnClickListener() {
+        mDataBinding.setTextContent("DataBinding Activity");
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                XToast.show("hello world");
-                startActivity(new Intent(MainActivity.this, MainDBActivity.class));
+                startActivity(new Intent(MainDBActivity.this, MainDBActivityKt.class));
             }
         });
     }
@@ -34,7 +43,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected boolean isFitDataBinding() {
-        return false;
+        return true;
     }
 
     @Override
