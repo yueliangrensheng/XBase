@@ -51,4 +51,14 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends WBaseActi
     protected boolean isFitDataBinding() {
         return true;
     }
+
+    @Override
+    protected void initViewsAndEvents() {
+
+    }
+
+    @Override
+    protected String getLayoutIDString() {
+        return null;
+    }
 }

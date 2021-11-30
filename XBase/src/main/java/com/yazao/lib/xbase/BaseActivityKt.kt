@@ -6,7 +6,8 @@ import com.yazao.lib.xnet.observer.NetUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
-abstract class BaseActivityKt<DB : ViewDataBinding> : WBaseActivity<DB>(), CoroutineScope by MainScope() {
+abstract class BaseActivityKt<DB : ViewDataBinding> : WBaseActivity<DB>(),
+    CoroutineScope by MainScope() {
 
     override fun isNoStateBar(): Boolean = false
 
@@ -25,4 +26,9 @@ abstract class BaseActivityKt<DB : ViewDataBinding> : WBaseActivity<DB>(), Corou
     override fun isTransparentStatusBar(): Boolean = false
 
     override fun isFitDataBinding(): Boolean = true
+
+    override fun initViewsAndEvents() {
+    }
+
+    override fun getLayoutIDString(): String = ""
 }
