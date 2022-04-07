@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.yazao.lib.util.activity.ActivityManager;
 import com.yazao.lib.xnet.observer.NetChangeObserver;
 import com.yazao.lib.xnet.observer.NetChangeReceiver;
 import com.yazao.lib.xnet.observer.NetChangeReceiverUtil;
@@ -131,6 +132,8 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
 
         initViewsAndEvents();
 
+        // activityManager
+        ActivityManager.getInstance().addActivity(this);
     }
 
     @Override
@@ -294,7 +297,6 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (mNetChangeObserver != null) {
             NetChangeReceiver.unRegisterObserver(mNetChangeObserver);
         }
@@ -303,6 +305,11 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
         if (mDataBinding != null) {
             mDataBinding = null;
         }
+
+        // activityManager
+        ActivityManager.getInstance().removeActivity(this);
+
+        super.onDestroy();
     }
 
     @Override
@@ -313,8 +320,8 @@ public abstract class WBaseActivity<DB extends ViewDataBinding> extends AppCompa
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (HideSoftInputUtil.getInstance(this).isShouldHideInput(ev)) {
-                HideSoftInputUtil.getInstance(this).hideSoftInput();
+            if (HideSoftInputUtil.getInstance().isShouldHideInput(this, ev)) {
+                HideSoftInputUtil.getInstance().hideSoftInput(this);
             }
         }
         return super.dispatchTouchEvent(ev);

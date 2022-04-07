@@ -4,10 +4,18 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 
+<<<<<<< HEAD:app/src/main/java/com/yazao/demo/xbase/MainActivity.java
+=======
+import androidx.fragment.app.FragmentTransaction;
+
+>>>>>>> 1.0.7.3:app/src/main/java/com/yazao/lib/xbase/MainActivity.java
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.BaseActivity;
 import com.yazao.lib.xbase.demo.R;
+<<<<<<< HEAD:app/src/main/java/com/yazao/demo/xbase/MainActivity.java
 import com.yazao.lib.xbase.demo.databinding.ActivityMainDataBindingBinding;
+=======
+>>>>>>> 1.0.7.3:app/src/main/java/com/yazao/lib/xbase/MainActivity.java
 import com.yazao.lib.xnet.observer.NetUtil;
 
 public class MainActivity extends BaseActivity {
@@ -29,10 +37,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                XToast.show("hello world");
+//                XToast.show("hello world");
                 startActivity(new Intent(MainActivity.this, MainDBActivity.class));
             }
         });
+
+        //fragment container
+        MyFragment myFragment = new MyFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, myFragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
