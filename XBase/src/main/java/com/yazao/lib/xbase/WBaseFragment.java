@@ -26,7 +26,6 @@ import java.lang.reflect.Field;
 public abstract class WBaseFragment<DB extends ViewDataBinding> extends Fragment {
 
 
-    private boolean isFirstResume = true;
     private boolean isFirstVisible = true;
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
@@ -111,26 +110,6 @@ public abstract class WBaseFragment<DB extends ViewDataBinding> extends Fragment
         }
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            if (isFirstVisible) {
-                isFirstVisible = false;
-                initPrepare();
-            } else {
-                onUserVisible();
-            }
-        } else {
-            if (isFirstInvisible) {
-                isFirstInvisible = false;
-                onFirstUserInvisible();
-            } else {
-                onUserInvisible();
-            }
-        }
-    }
-
     private synchronized void initPrepare() {
         if (isPrepared) {
             onFirstUserVisible();
@@ -167,20 +146,31 @@ public abstract class WBaseFragment<DB extends ViewDataBinding> extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-        if (getUserVisibleHint()) {
-            onUserInvisible();
-        }
+        onVisible(false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (isFirstResume) {
-            isFirstResume = false;
-            return;
-        }
-        if (getUserVisibleHint()) {
-            onUserVisible();
+
+        onVisible(true);
+    }
+
+    private void onVisible(boolean isVisibleToUser) {
+        if (isVisibleToUser) {
+            if (isFirstVisible) {
+                isFirstVisible = false;
+                initPrepare();
+            } else {
+                onUserVisible();
+            }
+        } else {
+            if (isFirstInvisible) {
+                isFirstInvisible = false;
+                onFirstUserInvisible();
+            } else {
+                onUserInvisible();
+            }
         }
     }
 

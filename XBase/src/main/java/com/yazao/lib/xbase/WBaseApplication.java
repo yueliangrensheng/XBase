@@ -2,6 +2,7 @@ package com.yazao.lib.xbase;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 import com.yazao.lib.xlog.BuildConfig;
 import com.yazao.lib.xlog.Log;
@@ -27,7 +28,11 @@ public class WBaseApplication extends Application {
 
     private void init() {
         //Log日志
-        Log.init().setLogLevel(BuildConfig.DEBUG ? Log.LogLevel.FULL : Log.LogLevel.NONE).setMethodCount(2).hideThreadInfo();
+        Log.init().setLogLevel(!isDebug() ? Log.LogLevel.FULL : Log.LogLevel.NONE).setMethodCount(2).hideThreadInfo();
+    }
+
+    public boolean isDebug() {
+        return getApplicationInfo() != null && (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
     }
 
 }
