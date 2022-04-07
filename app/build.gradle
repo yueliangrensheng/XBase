@@ -33,8 +33,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // xbase
-    implementation 'com.yazao:xbase:1.0.6.1'
-//    implementation project(':XBase')
+//    implementation 'io.github.yueliangrensheng:xbase:1.0.7.2'
+    implementation project(':XBase')
     // xtoast
-    implementation 'com.yazao:xtoast:1.0.2'
+    implementation 'io.github.yueliangrensheng:xtoast:1.0.3'
+    implementation 'androidx.fragment:fragment:1.3.5'
 }

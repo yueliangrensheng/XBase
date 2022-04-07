@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 
-import com.yazao.lib.net.NetUtil;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.demo.R;
+import com.yazao.lib.xnet.observer.NetUtil;
 
 public class MainActivity extends BaseActivity {
 
@@ -21,10 +23,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                XToast.show("hello world");
+//                XToast.show("hello world");
                 startActivity(new Intent(MainActivity.this, MainDBActivity.class));
             }
         });
+
+        //fragment container
+        MyFragment myFragment = new MyFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, myFragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override

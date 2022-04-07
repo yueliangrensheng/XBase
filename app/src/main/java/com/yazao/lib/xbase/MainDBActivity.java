@@ -2,10 +2,10 @@ package com.yazao.lib.xbase;
 
 import android.view.Gravity;
 
-import com.yazao.lib.net.NetUtil;
 import com.yazao.lib.toast.XToast;
 import com.yazao.lib.xbase.demo.R;
 import com.yazao.lib.xbase.demo.databinding.ActivityMainDataBindingBinding;
+import com.yazao.lib.xnet.observer.NetUtil;
 
 public class MainDBActivity extends BaseActivity<ActivityMainDataBindingBinding> {
 

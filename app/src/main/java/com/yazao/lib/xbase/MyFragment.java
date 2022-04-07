@@ -1,5 +1,6 @@
 package com.yazao.lib.xbase;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -31,6 +32,31 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void requestNetData() {
+
+    }
+
+    @Override
+    protected void onFirstUserVisible() {
+        super.onFirstUserVisible();
+        Log.e("yazao", " onFirstUserVisible");
+    }
+
+    @Override
+    protected void onFirstUserInvisible() {
+        super.onFirstUserInvisible();
+        Log.e("yazao", " onFirstUserInvisible");
+    }
+
+    @Override
+    protected void onUserVisible() {
+        super.onUserVisible();
+        Log.e("yazao", " onUserVisible");
+    }
+
+    @Override
+    protected void onUserInvisible() {
+        super.onUserInvisible();
+        Log.e("yazao", " onUserInvisible");
 
     }
 }
